@@ -8,19 +8,13 @@ set :rvm_path,              "/usr/local/rvm"
 set :rvm_bin_path,      "#{rvm_path}/bin"
 set :rvm_lib_path,      "#{rvm_path}/lib"
 
-set :default_environment, {
-  'PATH'                    => "#{rvm_path}/gems/ruby/#{rvm_ruby_string}/bin:#{rvm_bin_path}/bin:$PATH",
-  'RUBY_VERSION'    => '1.9.3p194',
-  'GEM_HOME'        => "#{rvm_path}/gems/#{rvm_ruby_string}",
-  'GEM_PATH'        => "#{rvm_path}/gems/#{rvm_ruby_string}",
-  'BUNDLE_PATH'     => "#{rvm_path}/gems/#{rvm_ruby_string}"
-}
 
 set :bundle_dir,            "#{rvm_path}/gems/#{rvm_ruby_string}"
 set :bundle_flags,      "--deployment --verbose"
 
 set :application, "midah.com.br"
 set :repository,  "git@github.com:rafarubert/capistrano_teste.git"
+
 
 set :scm, :git
 set :deploy_via, :remote_cache
