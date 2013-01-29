@@ -3,7 +3,7 @@ require 'rvm/capistrano'
 
 set :rails_env,             'production'
 set :rvm_type,              :system
-set :rvm_path,              "/usr/local/rvm"
+
 set :rvm_bin_path,      "#{rvm_path}/bin"
 set :rvm_lib_path,      "#{rvm_path}/lib"
 
