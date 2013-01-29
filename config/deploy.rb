@@ -3,8 +3,8 @@ set :rvm_type, :system
 require 'rvm/capistrano'
 load "deploy/assets"
 
-set :application, "midah.com.br"
-set :repository,  "git@github.com:sevana/presentear.git"
+set :application, "teste"
+set :repository,  "git@github.com:rafarubert/capistrano_teste.git"
 
 set :scm, :git
 set :deploy_via, :remote_cache
@@ -20,7 +20,7 @@ server application, :app, :web, :db, :primary => true
 after 'deploy:update_code', 'deploy:restart'
 after 'deploy:restart', 'deploy:database_link'
 after 'deploy:database_link', 'deploy:database_migrate'
-after 'deploy:execute_bundler', 'deploy:assets_precompile'
+after 'deploy:database_migrate', 'deploy:assets_precompile'
 after 'deploy:assets_precompile', 'deploy:update_crontab'
 
 namespace :deploy do
@@ -30,7 +30,7 @@ namespace :deploy do
 
   task :database_link do
     run "rm -rf #{release_path}/config/database.yml"
-    run "ln -s #{deploy_to}/database.yml #{release_path}/config/database.yml"
+    run "ln -s /home/#{user}/database.yml #{release_path}/config/database.yml"
   end
 
   task :database_migrate do
@@ -41,7 +41,7 @@ namespace :deploy do
     run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake assets:precompile"
   end
   namespace :assets do
-    task :assets_precompile, :roles => :web, :except => { :no_release => true } do
+    task :assets_precompile, :except => { :no_release => true } do
       if remote_file_exists?(current_path)
         from = source.next_revision(current_revision)
         if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
