@@ -1,8 +1,8 @@
 require 'bundler/capistrano'
-require 'rvm/capistrano'
+
 
 set :rvm_type,              :system
-
+require 'rvm/capistrano'
 
 set :application, "midah.com.br"
 set :repository,  "git@github.com:rafarubert/capistrano_teste.git"
