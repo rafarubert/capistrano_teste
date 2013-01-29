@@ -3,13 +3,9 @@ require 'rvm/capistrano'
 
 set :rails_env,             'production'
 set :rvm_type,              :system
-
+set :rvm_path,              "/usr/local/rvm"
 set :rvm_bin_path,      "#{rvm_path}/bin"
 set :rvm_lib_path,      "#{rvm_path}/lib"
-
-
-set :bundle_dir,            "#{rvm_path}/gems/#{rvm_ruby_string}"
-set :bundle_flags,      "--deployment --verbose"
 
 set :application, "midah.com.br"
 set :repository,  "git@github.com:rafarubert/capistrano_teste.git"
